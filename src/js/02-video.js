@@ -14,11 +14,30 @@ const onPlay = function (data) {
   console.log(localStorage.getItem(LOCALSTORAGE_KEY));
 };
 
-player.on('timeupdate', throttle(onPlay, 1000));
+// player
+//   .setCurrentTime()
+//   .then(function (seconds) {
+//     // seconds = the actual time that the player seeked to
+//   })
+//   .catch(function (error) {
+//     switch (error.name) {
+//       case 'RangeError':
+//         // the time was less than 0 or greater than the video’s duration
+//         break;
 
-const onSetup = function () {
-  player.setCurrentTime(
-    Number(localStorage.getItem('videoplayer-current-time'))
-  );
-};
-window.onload = onSetup;
+//       default:
+//         // some other error occurred
+//         break;
+//     }
+//   });
+
+setCurrentTime();
+
+function setCurrentTime() {
+  if (!localStorage.getItem(LOCALSTORAGE_KEY)) {
+    return;
+  }
+  player.setCurrentTime(localStorage.getItem(LOCALSTORAGE_KEY));
+}
+
+player.on('timeupdate', throttle(onPlay, 1000));
