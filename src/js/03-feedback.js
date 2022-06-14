@@ -20,15 +20,16 @@ function onFormSubmit(evt) {
   //! при відправці форми видаляємо дані з localeStorage, щоб при наступному разі,
   //! текст не з'являвся з localeStorage в текстовому полі
   localStorage.removeItem(LOCALSTORAGE_KEY);
+  console.log(formData);
 }
 
 function onTextareaInput(evt) {
   // значення інпуту
   // тут target, тому що при вик. currentTarget + throttle, в нас спливання і буде null,
   // з null ми не зможемо взяти value через 500 мс.
-  const message = evt.target.value;
+  // const message = evt.target.value;
   // значення інпута записуємо в localeStorage
-  localStorage.setItem(LOCALSTORAGE_KEY, message);
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(formData));
 }
 
 // При завантажені сторінки, витягуємо збережені дані з localeStorage
@@ -38,7 +39,7 @@ function populateTextarea() {
   // якщо є ключ в localeStorage, то виводимо в консоль, якщо немає - нічого не робимо
   if (savedMessage) {
     console.log(savedMessage);
-    // якщо щось є - обновляємо наш DOM, таким чином, при перезавантажені сторінки
+    // якщо щось є - оновлюємо наш DOM, таким чином, при перезавантажені сторінки
     // залишаються дані які вводив користувач з localeStorage, в текстовому полі
     refs.textarea.value = savedMessage;
   }
@@ -54,13 +55,14 @@ refs.form.addEventListener('input', evt => {
   // console.log(evt.target.value);
 
   formData[evt.target.name] = evt.target.value;
-  console.log(formData);
 
   // const dataKey = evt.target.name;
   // const dataValue = evt.target.value;
   // const dataStorage = JSON.stringify(FormData);
+
   // localStorage.setItem(dataKey, dataValue);
   // localStorage.setItem(dataKey, dataValue);
 });
 
-// 43.50
+//* 1. Зробить запис об'єкта в localStorage
+//* 2.✅ Виводить при "submit" об'єкт: @mail, textarea
