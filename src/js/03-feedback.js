@@ -24,6 +24,8 @@ function onFormSubmit(evt) {
 
 function onTextareaInput(evt) {
   // значення інпуту
+  // тут target, тому що при вик. currentTarget + throttle, в нас спливання і буде null,
+  // з null ми не зможемо взяти value через 500 мс.
   const message = evt.target.value;
   // значення інпута записуємо в localeStorage
   localStorage.setItem(LOCALSTORAGE_KEY, message);
@@ -41,3 +43,24 @@ function populateTextarea() {
     refs.textarea.value = savedMessage;
   }
 }
+
+// Зберігаємо введені дані у вигляді об'єкта
+const formData = {};
+
+refs.form.addEventListener('input', evt => {
+  //! Ключ
+  // console.log(evt.target.name);
+  //! Значення
+  // console.log(evt.target.value);
+
+  formData[evt.target.name] = evt.target.value;
+  console.log(formData);
+
+  // const dataKey = evt.target.name;
+  // const dataValue = evt.target.value;
+  // const dataStorage = JSON.stringify(FormData);
+  // localStorage.setItem(dataKey, dataValue);
+  // localStorage.setItem(dataKey, dataValue);
+});
+
+// 43.50
