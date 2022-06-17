@@ -55,14 +55,4 @@ refs.form.addEventListener('input', evt => {
   // console.log(evt.target.value);
 
   formData[evt.target.name] = evt.target.value;
-
-  // const dataKey = evt.target.name;
-  // const dataValue = evt.target.value;
-  // const dataStorage = JSON.stringify(FormData);
-
-  // localStorage.setItem(dataKey, dataValue);
-  // localStorage.setItem(dataKey, dataValue);
 });
-
-//* 1. Зробить запис об'єкта в localStorage
-//* 2.✅ Виводить при "submit" об'єкт: @mail, textarea
